@@ -12,20 +12,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Bảng Color</strong>
-                                <br>
-                                <strong style="color: red" class="card-title">{{session('mess')}}</strong>
-                            </div>
-                            <div class="col-lg-6 col-6 text-left">
-                                <form action="/admin/color/" method="get">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="kw" placeholder="Tìm kiếm id sản phẩm">
-                                        <div class="input-group-append">
-                                            <input type="submit" class="input-group-text bg-transparent text-primary" value="Tìm Kiếm">
-                                                
-                                            </span>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                             <div class="card-body">
                                 @foreach ($role as $k=>$v)
@@ -48,7 +34,7 @@
                                        @foreach ($Color as $item)
                                        <?php $n++ ?>
                                        <td>{{$n}}</td>
-                                       <td>{{$item->id_product}} - {{$item->name_product}}</td>
+                                       <td>{{$item->name_product}}</td>
                                         <td>{{$item->name_color}}</td>
                                         @foreach ($role as $k=>$v)
                                         @if($v->role_module=="role_update_color")
@@ -66,7 +52,7 @@
                                                 <form action="color/delete/{{$item->id_color}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="delete">
-                                                    <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
+                                                    <button class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
                                                 </form>
                                             </td>
                                             @endif
@@ -74,7 +60,6 @@
                                     </tbody>
                                     @endforeach
                                 </table>
-                                {{$Color->links()}}
                             </div>
                         </div>
                     </div>

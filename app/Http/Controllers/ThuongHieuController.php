@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ThuongHieu;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use DB;
 class ThuongHieuController extends Controller
@@ -25,6 +24,8 @@ class ThuongHieuController extends Controller
      */
     public function create()
     {
+       
+        
         return view('admin.thuonghieu.addThuonghieu');
     }
 
@@ -37,14 +38,7 @@ class ThuongHieuController extends Controller
     public function store(Request $request)
     {
         
-        $v = $request->validate([
-            'tenthuonghieu'=>'unique:thuonghieu',
-        ],
-        [
-            'tenthuonghieu.unique'=>'Không được trùng tên thương hiệu đã có sẵn',
-           
-        ]
-    );
+ 
         $data1 =array();
         $data1['idthuonghieu']=$request->idthuonghieu; 
         $data1['tenthuonghieu']=$request->tenthuonghieu;
@@ -103,17 +97,8 @@ class ThuongHieuController extends Controller
      */
     public function destroy($id)
     {
-        $n =Category::where('id_thuonghieu','=', $id)->first();
-        if ($n ==null)
-        {
-            $Thuonghieu = ThuongHieu::find($id);
-            $Thuonghieu->delete();
-            session()->flash('mess', 'Xóa Thành công!');
-        }
-        else 
-        {
-            session()->flash('mess', 'Không thể xóa( còn loại sản phẩm trong thương hiệu này này )! ');
-        }
+        $Thuonghieu = ThuongHieu::find($id);
+        $Thuonghieu->delete();
         return redirect('/admin/thuonghieu/');
     }
 }

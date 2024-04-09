@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SHOP GIÀY NEW</title>
+    <title>EShopper - Bootstrap Shop Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -31,21 +31,55 @@
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-
-
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="{{URL('/')}}" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span
-
-                            class="text-primary font-weight-bold border px-3 mr-1">GIÀY</span>  NEW</h1>
-
-                 
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
+                <form action="/" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="kw" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <input type="submit" class="input-group-text bg-transparent text-primary" value="Tìm Kiếm">
 
-            </div>  
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="aa col-lg-3 col-6 text-right">
                 <ul>
                     <li style=" margin-left: 100px">
@@ -53,11 +87,12 @@
                             <i class="fas fa-heart text-primary"></i>
                             <span class="badge">0</span>
                         </p>
-
-                        
+                
+                        <ul>
+                        </ul>
                     </li>
-                    <li id=" ">
-                        <p class="btn border" data-toggle="dropdown" >
+                    <li>
+                        <p class="btn border" data-toggle="dropdown">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             @if(Session::has('Cart') != null)
                             <span class="badge" id="total-quanty-show">{{Session::get('Cart')->totalQuanty}}</span>
@@ -69,105 +104,75 @@
                             <li>
                                 <div class="cart-hover">
                                     <div id="change-item-cart"
-                                        style="margin-left: -220px; background-color: aliceblue;padding: 10px; border-radius: 10px;  ">
+                                        style="margin-left: -200px; background-color: aliceblue;  ">
 
                                         @if(Session::has('Cart') != null)
+
                                         <div class="select-items" style="margin-left: 20px;  ">
                                             <table>
-
                                                 <tbody>
                                                     @foreach(Session::get('Cart')->products as $item)
-                                                    <tr class="">
-                                                        <td>
-                                                            <img style="height: 70px;margin-right: 20px"
+                                                    <tr>
+                                                        <td class="si-pic"><img style="height: 50px;"
                                                                 src="/frontend/img/{{$item['productInfo']->image}}"
-                                                                alt="" />
+                                                                alt="" /></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>{{$item['productInfo']->name_product}} </p>
+
+                                                            </div>
                                                         </td>
-                                                        <td class="">
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>{{$item['productInfo']->price}} x {{$item['quanty']}}
+                                                                </p>
 
-                                                            <h6 style="font-weight: 900;white-space: nowrap; ">
-                                                                {{$item['productInfo']->name_product}} </h6>
-
-
-
-
-                                                            <h6 style="font-size: 13px">Kích cỡ:
-                                                                {{$item['productInfo']->number_size}} </h6>
-                                                            <h6 style="font-size: 13px">Màu:
-                                                                {{$item['productInfo']->name_color}} </h6>
-                                                            <h6 style="font-size: 13px">
-                                                                Số lượng: {{$item['quanty']}}
-                                                            </h6>
-                                                            <h6 style="color:#D19C97;font-weight:700  ">{{ number_format($item['productInfo']->price, 0, '.', '.') . ' VNĐ' }}
-                                                                 </h6>
+                                                            </div>
                                                         </td>
-
-
-                                                        <td class=" delete ">
-
-                                                            <button class="btn-xoa-cart btn btn-sm text-dark p-0 "
-                                                                data="{{$item['productInfo']->id}}"
-                                                                value="{{$item['productInfo']->id_size.$item['productInfo']->id_color}}">
-                                                                <i style="padding: 20px"
-                                                                    class="fa fa-times"></i></button>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>{{$item['productInfo']->number_size}}  </p>
+                                                                 
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>{{$item['productInfo']->name_color}}  </p>
+                                                                 
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-text delete">
+                                                            <p class="xoa" data-id="{{$item['productInfo']->id}}">xoa
+                                                            </p>
                                                         </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
-
-                                        <div class="select-total text-right" style="padding: 20px 10px; ">
-                                            <span style="font-size: 20px;font-weight: 700">Tổng:</span>
-                                            <span
-                                                style="color:#D19C97;font-weight:700;font-size: 20px">{{ number_format(Session::get('Cart')->totalPrice, 0, '.', '.') . ' VNĐ' }}
-                                                 </span>
+                                        <div class="select-total">
+                                            <span>total:</span>
+                                            <h5>{{(number_format(Session::get('Cart')->totalPrice))}}VNĐ</h5>
                                         </div>
-                                        <div class="d-flex justify-content-center py-2">
-                                            <a href="{{url('/List-Cart')}}">
-                                                <button class="btn btn-primary px-2 rounded mx-2">
-                                                    Xem Giỏ Hàng
-                                                </button>
-                                            </a>
-                                            
-                                            <?php
-                                            $data1 = Session::get('data1');
-                                            ?>
-                                            @if ($data1 == null)
-                                                <a href="{{URL::to('/login')}}">
-                                                    <button class="btn btn-primary px-2 rounded mx-2">
-                                                        Thanh Toán
-                                                    </button>
-                                                </a>
-                                            @else
-                                                <a href="{{URL('/checkout')}}">
-                                                    <button class="btn btn-primary px-2 rounded mx-2">
-                                                        Thanh Toán
-                                                    </button>
-                                                </a>
-                                            @endif
+                                        <div class="select-button">
+                                            <a  href="{{url('/List-Cart')}}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Xem giỏ hàng</a>
+                <a href="" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Mua
+                    Ngay</a>
                                         </div>
                                         
-                                        
-                                        
-
-                                    </div>
+                                    </div>                           
                                     @else
-                                    <p style="padding: 10px; border-radius: 10px;font-weight: 700" class="text-center">Không có sản phẩm nào trong giỏ hàng</p>
-
-
+                                    <p>khong có sản phẩm nào trong giỏ hàng </p>
+                                 
                                     @endif
 
-
+                                     
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
-
-
+            </li>
+            </ul>
+            </li>
+            </ul>
         </div>
     </div>
     </div>
@@ -221,41 +226,18 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{URL('/')}}" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="{{URL('/')}}" class="nav-item nav-link active">Home</a>
                             {{-- <a href="{{URL('/shop')}}" class="nav-item nav-link">Shop</a> --}}
-                            <a href="{{URL('/cart')}}" class="nav-item nav-link">Giỏ Hàng</a>
-                            <?php
-                            $data1=Session::get('data1');
-                            ?>
-                            <!-- Checkout Start -->
-                            @if( $data1 == null)
-                            <a href="{{URL::to('/login')}}" class="nav-item nav-link">Thanh Toán</a>
-                            @else
-                            <a href="{{URL('/checkout')}}" class="nav-item nav-link">Thanh Toán</a>
-                            @endif
-                            {{-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Trang</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{{URL('/cart')}}" class="dropdown-item">Giỏ Hàng</a>
-                        
-                                    <!-- Checkout Start -->
-                                    @if( $data1 == null)
-                                    <a href="{{URL::to('/login')}}" class="dropdown-item">Thanh Toán</a>
-                                    @else
-                                    <a href="{{URL('/checkout')}}" class="dropdown-item">Thanh Toán</a>
-                                    @endif
-                                </div>
-                            </div> --}}
-                            <a href="{{URL('/contact')}}" class="nav-item nav-link">Liên Hệ</a>
 
-                            <?php
-                            $data1=Session::get('data1');
-                            ?>
-                            @if( $data1 == null)
-                            <a href="{{URL::to('/login')}}" class="nav-item nav-link">Xem Đơn Hàng</a>
-                            @else
-                            <a href="/donhang/{{$data1->id??""}}" class="nav-item nav-link">Lịch sử Đơn Hàng</a>
-                            @endif
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="{{URL('/cart')}}" class="dropdown-item">Shopping Cart</a>
+                                    <a href="{{URL('/checkout')}}" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>
+                            <a href="{{URL('/contact')}}" class="nav-item nav-link">Contact</a>
+                            <a href="{{URL('/blog')}}" class="nav-item nav-link">Blog</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php
@@ -267,7 +249,7 @@
 
                         </div>
                         @else<div class="navbar-nav ml-auto py-0">
-                            <a href="/info_user/{{$data1->id??""}}" class="nav-item nav-link">Xin chào {{$data1->fullname??""}}</a>
+                            <a class="nav-item nav-link">Xin chào {{$data1->fullname??""}}</a>
                             <a href="{{URL::to('/logoutuser') }}" class="nav-item nav-link">Đăng Xuất</a>
                         </div>
                         @endif
@@ -276,15 +258,25 @@
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="height: 410px;">
-                            <img class="img-fluid" src="{{url('frontend')}}/img/bitis.jpg" alt="Image">
+                            <img class="img-fluid" src="{{url('frontend')}}/img/carousel-1.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                        Order</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                </div>
                             </div>
                         </div>
                         <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="{{url('frontend')}}/img/bitis1.jpg" alt="Image">
+                            <img class="img-fluid" src="{{url('frontend')}}/img/carousel-2.jpg" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                        Order</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -304,79 +296,6 @@
     </div>
     <!-- Navbar End -->
     @yield('user')
-
-
-    <!-- Footer Start -->
-
-    <div class="container-fluid bg-secondary text-dark custom-footer">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span
-                            class="text-primary font-weight-bold border border-white px-3 mr-1">GIÀY </span>NEW</h1>
-                </a>
-                <p>Cửa hàng SHOP GIÀY NEW uy tín hàng đầu. Chất lượng sản phẩm, giá thành phải chăng được nhiều người
-                    tin dùng và ủng hộ.</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>180 Cao Lỗ, P4, Q8, TPHCM</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>shopgiay5797@gmail.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0334653923</p>
-            </div>
-            <div class="col-lg-4 col-md-12 mb-5 text-center">
-                <h5 class="font-weight-bold text-dark mb-4">SHARE ON</h5>
-                <div class="d-inline-flex justify-content-center">
-                    <a class="text-primary px-3 py-2" href="">
-                        <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                    </a>
-                    <a class="text-danger px-3 py-2" href="">
-                        <i class="fab fa-instagram fa-lg"></i>
-                    </a>
-                    <a class="text-info px-3 py-2" href="">
-                        <i class="fab fa-twitter fa-lg"></i>
-                    </a>
-                    <a class="text-danger px-3 py-2" href="">
-                        <i class="fab fa-pinterest fa-lg"></i>
-                    </a>
-                </div>
-            </div>
-            
-            
-            <div class="col-lg-4 col-md-12">
-                
-                  
-                        <h5 class="font-weight-bold text-dark mb-4">
-                            BẠN NÊN XEM</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="  text-dark mb-2" href="{{URL('/')}}">Trang
-                                chủ</a>
-
-                            <a class="text-dark mb-2" href="{{URL('/contact')}}">Liên Hệ</a>
-                            <a class="text-dark mb-2" href="{{URL('/cart')}}">Giỏ
-                                hàng</a>
-                            <a class="text-dark mb-2" href="/donhang/{{$data1->id??""}}">Lịch sử đơn hàng</a>
-                            <?php
-                        $data1=Session::get('data1');
-                        ?>
-                            <!-- Checkout Start -->
-                            @if( $data1 == null)
-                            <a class="text-dark" href="{{URL::to('/login')}}"> Thanh toán</a>
-                            @else
-                            <a class="text-dark" href="{{URL('/checkout')}}">Thanh
-                                toán</a>
-                            @endif
-
-                        </div>
-                 
-
-           
-            </div>
-        </div>
-        
-      
-
-    </div>
-    <!-- Footer End -->
-
-
 
 </body>
 

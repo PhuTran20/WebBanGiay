@@ -41,17 +41,16 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $r)
+    public function show()
     {
-        $kw = $r->kw?$r->kw:'';
-        $kw="%".$kw."%";
+       
         $Size = Size::join('product','product.id','=','size.id_product')
         ->select(
             'product.*',
             'size.*',
             )
-            ->where('id_product','like',$kw)->paginate(10);
-            $Size->appends(['kw'=>$r->kw]);
+            ->get();
+            
           
         return view('admin.size.index',['Size'=>$Size] );
     }
@@ -66,13 +65,7 @@ class SizeController extends Controller
     {
         
         $Product= Product::all();
-        $Size=Size::where('id_size',$id)->join('product', 'product.id', '=', 'size.id_product')
-        ->select(
-            'product.*', 
-            'size.*',
-        )
-        ->first();
-       
+        $Size=Size::find($id);
         return view('admin.size.edit',['data'=>$Size],compact('Product'));
     }
 
@@ -102,7 +95,6 @@ class SizeController extends Controller
     {
         $Size = Size::find($id);
         $Size->delete();
-        session()->flash('mess', 'Xóa Thành công!');
         return redirect('/admin/size/');
     }
 }

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Shop giày new</title>
+    <title>Ela Admin - HTML5 Admin Template</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,7 +34,7 @@
 ?>
 <body>
     <!-- Left Panel -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -47,6 +47,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" > <i class="menu-icon fa fa-users"></i>Quản lí</a>
                         <ul class="sub-menu children dropdown-menu">
                             @foreach ($role as $k=>$v)
+                               
                                 @if($v->role_module=="role_product")
                                     <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/product')}}">Quản lí Sản phẩm</a></li>
                                 @endif
@@ -58,6 +59,10 @@
                                 @if($v->role_module=="role_category")
                                     <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/category')}}">Quản lí Loại sản phẩm</a></li>
                                 @endif
+                                
+                                @if($v->role_module=="role_blog")
+                                    <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/blog')}}">Quản lí Blog</a></li>
+                                @endif
 
                                 @if($v->role_module=="role_donhang")
                                 <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/order')}}">Quản lí Đơn hàng</a></li>
@@ -67,58 +72,23 @@
                                 <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/size')}}">Quản lí Size</a></li>
                                 @endif
                                 @if($v->role_module=="role_color")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/color')}}">Quản lí Màu</a></li>
+                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/color')}}">Quản lí Color</a></li>
                                 @endif
-                                @if($v->role_module=="role_user")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/khachhang')}}">Quản lí Khách hàng</a></li>
-                                @endif
-                                @if($v->role_module=="role_coupon")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/coupon')}}">Quản lí Mã Giảm Gía</a></li>
-                                @endif
-                                @if($v->role_module=="role_comment")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/comment')}}">Quản lí Đánh giá</a></li>
-                                @endif
-                            @endforeach
-                            
-                            
-                        </ul>
-                    </li>
-                    
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" > <i class="menu-icon fa fa-users"></i>Quyền</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            @foreach ($role as $k=>$v)
-                               
-                               
 
                                 @if($v->role_module=="role_accout")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/accout')}}">Quản lí Tài khoản Admin</a></li>
+                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/accout')}}">Quản lí Acoout Admin</a></li>
                                 @endif
 
+                            @endforeach
                                 
-
-                                @if($v->role_module=="role_role")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/role')}}">Quản lí Quyền</a></li>
-                                @endif
-
-                                {{-- @if($v->role_module=="role_role-admin")
-                                <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/role_admin')}}">Quản lí Quyền Admin</a></li>
-                                @endif --}}
-                            @endforeach
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" > <i class="menu-icon fa fa-users"></i>Vận chuyển</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            @foreach ($role as $k=>$v) 
                             
-                            @if($v->role_module=="role_shipper")
-                            <li><i class="menu-icon fa fa-paperclip"></i><a href="{{URL('/admin/shipper')}}">Vận chuyển</a></li>
-                            @endif
-                            @endforeach
+                            
+                            
                         </ul>
                     </li>
+                   
+
+                   
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -129,8 +99,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{URL('/admin/trangchu')}}"><img src="{{url('backend')}}/img/logogiaynew.png" alt="Logo"></a>
-               
+                    <a class="navbar-brand" href="./"><img src="{{url('backend')}}/img/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="{{url('backend')}}/img/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -164,8 +134,12 @@
                         <div class="user-menu dropdown-menu">
                            
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>{{$data->fullname??""}}</a>
-                            <a class="nav-link" href="/admin/edit-acc-admin/{{$data->id}}"><i class="fa fa- user"></i>Cài đặt</a>
-                            <a class="nav-link" href="{{URL::to('/admin/logout') }}"><i class="fa fa-power -off"></i>Đăng xuất</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+                            <a class="nav-link" href="{{URL::to('/admin/logout') }}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 

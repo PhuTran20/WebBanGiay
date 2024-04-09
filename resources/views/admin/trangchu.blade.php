@@ -6,7 +6,7 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -15,11 +15,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            @if($status == 3)
-                                          
-                                            <div class="stat-text"><span>{{number_format((int)$count,0,'.','.').' '.'VNĐ' }}</span> </div>
-                                            <div class="stat-heading">Doanh thu</div>
-                                            @endif
+                                            <div class="stat-text">$<span class="count">23569</span></div>
+                                            <div class="stat-heading">Revenue</div>
                                         </div>
                                     </div>
                                 </div>
@@ -27,7 +24,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -36,8 +33,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="">{{$OrderCount}}</span></div>
-                                            <div class="stat-heading">Số Lượng Đơn hàng</div>
+                                            <div class="stat-text"><span class="count">3435</span></div>
+                                            <div class="stat-heading">Sales</div>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +42,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -54,16 +51,16 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="">349</span></div>
-                                            <div class="stat-heading">Kho sản phẩm</div>
+                                            <div class="stat-text"><span class="count">349</span></div>
+                                            <div class="stat-heading">Templates</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="stat-widget-five">
@@ -72,8 +69,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="">{{$userCount}}</span></div>
-                                            <div class="stat-heading">Tài khoản </div>
+                                            <div class="stat-text"><span class="count">2986</span></div>
+                                            <div class="stat-heading">Clients</div>
                                         </div>
                                     </div>
                                 </div>
@@ -83,90 +80,48 @@
                 </div>
                 <!-- /Widgets -->
                 <!--  Traffic  -->
-                <style>
-                    .form-group {
-                        display: inline-block;
-                        margin-right: 10px;
-                    }
-                </style>
-                <div class="container">
-                    <h2 class="form-heading"><b>Thống kê doanh thu</b></h2>
-                    <form action="/admin/trangchu" method="get">
-                        
-                        <div class="form-group">
-                            <label for="from_date">Từ ngày:</label>
-                            <input type="date" id="from_date" name="ngay1" value="{{ old('ngay2', $request->input('ngay1')) }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="to_date">Đến ngày:</label>
-                            <input type="date" id="to_date" name="ngay2" value="{{ old('ngay2', $request->input('ngay2')) }}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <select name="thongke_loai" id="thongke_loai">
-                                <option value="none">Lọc theo</option>
-                                <option value="quy1">Quý 1</option>
-                                <option value="quy2">Quý 2</option>
-                                <option value="quy3">Quý 3</option>
-                                <option value="quy4">Quý 4</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn-submit">Thống kê</button>
-                        </div>
-                        <div class="form-group" ></div>
-                        <div class="form-group" ></div>
-                        <div class="form-group" ></div>
-                        <div class="form-group" ></div>
-                        <div class="form-group" ></div>
-                        <?php
-                                    $tongDoanhThu = 0; // Biến để tích lũy tổng doanh thu
-
-                                    foreach($thongke as $item) {
-                                        $tongDoanhThu += $item->total; // Cộng tổng vào biến $tongDoanhThu
-                                    ?>
-                         <?php
-                        }
-                        ?>
-                        <div class="form-group" >
-                            <h4><b>Tổng doanh thu: {{ number_format($tongDoanhThu, 0, '.', '.') }} VNĐ</b></h4>
-                        </div>
-                        <div class="">
-                            <table class="table table-striped table-bordered"> 
-                                <thead>
-                                    <tr>
-                                        <th>Ngày</th>
-                                        <th>Doanh thu</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $tongDoanhThu = 0; // Biến để tích lũy tổng doanh thu
-
-                                    foreach($thongke as $item) {
-                                        $tongDoanhThu += $item->total; // Cộng tổng vào biến $tongDoanhThu
-                                    ?>
-                                    <tr>
-                                        <td>{{ $item->date_payment}}</td>
-                                        <td>{{number_format($item->total,0,'.','.') }} VNĐ</td>
-                                    </tr>
-                                    <?php
-                                        }
-                                    ?>
-                                </tbody>
-                                
-                            </table>
-                           
-                        </div>
-                        
-                    </form>
-                </div>
+               
+                
                 
 
                   
               
                
-                
+                <div class="modal fade none-border" id="add-category">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title"><strong>Add a category </strong></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label">Category Name</label>
+                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label">Choose Category Color</label>
+                                            <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                <option value="success">Success</option>
+                                                <option value="danger">Danger</option>
+                                                <option value="info">Info</option>
+                                                <option value="pink">Pink</option>
+                                                <option value="primary">Primary</option>
+                                                <option value="warning">Warning</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- /#add-category -->
             </div>
             <!-- .animated -->

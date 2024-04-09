@@ -7,13 +7,11 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Bảng Tài khoản Admin</strong>
-                                <br>
-                                <strong style="color: red" class="card-title">{{session('mess')}}</strong>
+                                <strong class="card-title">Bảng Accout Admin</strong>
                             </div>
                            
                             <div class="card-body">
-                                <a href="{{URL::to('/admin/accout/create') }}">
+                                <a href="{{URL::to('/admin/accout_admin/create') }}">
                                     <button class="btn btn-outline-primary" style="margin-bottom: 15px;"><i class="fa fa-star"></i>Thêm Accout</button>
                                 </a>
                                 <table class="table table-striped table-bordered"> 
@@ -22,7 +20,6 @@
                                             <th>ID</th>
                                             <th>Username</th>
                                             <th>Password </th>
-                                            <th>Xem Quyền </th>
                                             <th>Tên đầy đủ </th>
                                             <th>Số điện thoại </th>
                                            
@@ -36,21 +33,20 @@
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->username}}</td>
                                             <td>{{$item->password}}</td>
-                                            <td><a href="{{URL::to('/admin/accout/show-role/'.$item->id)}}">Xem chi tiết</a></td>
                                             <td>{{$item->fullname}}</td>
                                             <td>{{$item->phone}}</td>
                                            
                                             <td>
-                                                <a href="accout/edit/{{$item->id}}">
+                                                <a href="">
                                                 <button  class="btn btn-outline-secondary">
                                                 <i class="fa fa-edit"></i>Sửa</button>
                                                 </a>
                                             </td>
                                             <td>
-                                                <form action="accout/delete/{{$item->id}}" method="post">
+                                                <form action="" method="post">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="delete">
-                                                    <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
+                                                    <button class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
                                                 </form>
                                             </td>
                                         </tr>

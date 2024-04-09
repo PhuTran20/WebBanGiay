@@ -11,15 +11,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Bảng SẢN PHẨM</strong><br>
-                                <strong style="color: red" class="card-title">{{session('mess')}}</strong>
-                                <strong style="color: red" class="card-title">{{session('messthem')}}</strong>
-                                <strong style="color: red" class="card-title">{{session('messsua')}}</strong>
+                                <strong class="card-title">Bảng SẢN PHẨM</strong>
                             </div>
                             <div class="col-lg-6 col-6 text-left">
                                 <form action="/admin/product/" method="get">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="kw" placeholder="Tìm kiếm sản phẩm">
+                                        <input type="text" class="form-control" name="kw" placeholder="Search for products">
                                         <div class="input-group-append">
                                             <input type="submit" class="input-group-text bg-transparent text-primary" value="Tìm Kiếm">
                                                 
@@ -43,8 +40,6 @@
                                             <th>Tên sản phẩm</th>
                                             <th>Tên loại</th>
                                             <th>Giá</th>
-                                            <th>Xem size</th>
-                                            <th>Xem màu</th>
                                             <th>Mô tả </th>
                                             <th>Ảnh</th>
                                         
@@ -55,36 +50,28 @@
                                         @foreach ( $Product as $item)
                                         <?php $n++ ?>
                                         <td>{{$n}}</td>
-                                        <td>{{$item->id}} - {{$item->name_product}}</td>
+                                        <td> {{$item->name_product}}</td>
                                         <td> {{$item->name_category}}</td>
                                         <td>{{number_format($item->price).' '.'VNĐ' }}</td>
-                                        <td> <a href="{{URL::to('/admin/product/show_size/' .$item->id)}}">Xem size</a></td>
-                                        <td> <a href="{{URL::to('/admin/product/show_color/' .$item->id)}}">Xem màu</a></td>
                                         <td> {{$item->description}}</td>
-                                        <td><img style="max-width: 90px; height 200px;" src="{{ URL::to('/frontend/img/'.$item->image)}}"
+                                        <td><img style="max-width: 200px; height 200px;" src="{{ URL::to('/frontend/img/'.$item->image)}}"
                                             alt=""></td> 
                                             <td>
                                                 @foreach ($role as $k=>$v)
-                                                @if($v->role_module=="role_edit_product")
-                                                <td>
+                                                    @if($v->role_module=="role_edit_product")
                                                 <a href="product/edit/{{$item->id}}">
                                                 
                                                 <button  class="btn btn-outline-secondary">
                                                 <i class="fa fa-edit"></i>Sửa</button>
                                                 </a>
-                                                 </td>
-                                                 @endif
-                                                @if($v->role_module=="role_delete_product")
-                                                <td>
+                                                     @endif
+                                                     @if($v->role_module=="role_delete_product")
                                                 <form action="product/delete/{{$item->id}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="delete">
-                                                    <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
+                                                    <button class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
                                                 </form>
-                                                 </td>
-                                                 <td >
-                                                    <form action="produc/an/{{$item->id}}"></form>an</td>
-                                                @endif
+                                                    @endif
                                                 @endforeach
                                             </td>
                                     </tbody>

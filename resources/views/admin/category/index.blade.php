@@ -7,14 +7,12 @@
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-                    <h1></h1>
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Bảng loại sản phẩm</strong><br>
-                                <strong style="color: red" class="card-title">{{session('mess')}}</strong>
+                                <strong class="card-title">Bảng Thương Hiệu</strong>
                             </div>
-                           
                             <div class="card-body">
                                 @foreach ($role as $k=>$v)
                                 @if($v->role_module=="role_create_category")
@@ -35,40 +33,38 @@
                                         <?php $n=0 ?>
                                        @foreach ($Category as $item)
                                        <?php $n++ ?>
-                                       <tr>
                                        <td>{{$n}}</td>
                                         <td>{{$item->tenthuonghieu}}</td>
                                         <td>{{$item->name_category}}</td>
-                                        
+                                        @foreach ($role as $k=>$v)
                                             <td>
-                                                @foreach ($role as $k=>$v)
+                                                
                                                 @if($v->role_module=="role_edit_category")
                                                 <a href="category/edit/{{$item->idloaigiay}}">
                                                 <button  class="btn btn-outline-secondary">
                                                 <i class="fa fa-edit"></i>Sửa</button>
                                                 </a>
                                                 @endif
-                                                @endforeach
                                             </td>
-                                      
+                                            @if($v->role_module=="role_delete_category")
                                             <td>
-                                                @foreach ($role as $k=>$v)
-                                                @if($v->role_module=="role_delete_category")
+                                                
                                                 <form action="category/delete/{{$item->idloaigiay}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="delete">
-                                                    <button onclick="return confirm('Bạn chắc chắn muốn xóa?')" class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
+                                                    <button class="btn btn-outline-danger" style="margin-bottom: 15px;"><i class="ti-trash"></i> Xóa</button>
                                                 </form>
-                                                @endif
-                                                @endforeach
                                             </td>
-                                        </tr>
-                                        @endforeach
+                                            @endif
+                                            @endforeach
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->

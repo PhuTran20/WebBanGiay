@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ThuongHieu;
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 
 use DB;
@@ -40,7 +39,7 @@ class CategoryController extends Controller
         
         $shop = Category::find($id);
         
-        return view('shop', ['shop' => $shop,'shopProduct'=>$shopProduct]);
+        return view('shop', ['shop' => $shop,'shopProduct'=>$shopProduct ]);
     }
     public function create()
     {
@@ -57,15 +56,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $v = $request->validate([
-            'name_category'=>'required|unique:category_product',
-            
-        ],
-        [
-            'name_category.required'=>'Không được bỏ trống',
-            'name_category.unique'=>'Trùng loại rồi!!',
-        ]
-    );
         $data1 =array();
         $data1['idloaigiay']=$request->idloaigiay ; 
         $data1['name_category']=$request->name_category;
@@ -102,13 +92,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        
         $ThuongHieu= ThuongHieu::all();
-        $Category=Category::where('idloaigiay',$id)->join('thuonghieu', 'thuonghieu.idthuonghieu', '=', 'category_product.id_thuonghieu')
-        ->select(
-            'thuonghieu.*', 
-            'category_product.*'
-        )
-        ->first();
+        $Category=Category::find($id);
         return view('admin.category.edit',['data'=>$Category],compact('ThuongHieu'));
     }
 
@@ -136,19 +122,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $n =Product::where('idloaigiay','=', $id)->first();
-        if ($n ==null)
-        {
-            $Category = Category::find($id);
-        
-            $Category->delete();
-            session()->flash('mess', 'Xóa Thành công!');
-        }
-        else 
-        {
-            session()->flash('mess', 'Không thể xóa( còn sản phẩm chứa loại này)! ');
-        }
+        $Category = Category::find($id);
+        $Category->delete();
         return redirect('/admin/category/');
-       
     }
 }

@@ -13,5 +13,5 @@ class Order extends Model
   
 
     public $timestamps=false;
-    public $fillable =['id','total','coupon_code', 'id_user','date_payment','consingnee_email','consingnee_name', 'consingnee_address', 'consingnee_phone','vnp_TxnRef','vnp_TransactionNo','vnp_BankCode','vnp_OrderInfo','status','status_payment'];
+    public $fillable =['id', 'id_user','date_payment','consingnee_email','consingnee_name', 'consingnee_address', 'consingnee_phone'];
 }

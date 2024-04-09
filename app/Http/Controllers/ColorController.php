@@ -41,17 +41,15 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $r)
+    public function show()
     {
-        $kw = $r->kw?$r->kw:'';
-        $kw="%".$kw."%";
         $Color = Color::join('product','product.id','=','color.id_product')
         ->select(
             'product.*',
             'color.*',
         )
-        ->where('id_product','like',$kw)->paginate(10);
-        $Color->appends(['kw'=>$r->kw]);
+        ->get();
+        
         return view('admin.color.index',['Color'=>$Color]);
     }
 
@@ -95,7 +93,6 @@ class ColorController extends Controller
     {
         $Color = Color::find($id);
         $Color->delete();
-        session()->flash('mess', 'Xóa Thành công!');
         return redirect('/admin/color/');
     }
 }

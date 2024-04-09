@@ -27,11 +27,6 @@ class AppServiceProvider extends ServiceProvider
         View()->share('thuonghieu',DB::table('thuonghieu')->get());
         View()->share('category',DB::table('category_product')->get());
         View()->share('product',DB::table('product')->get());
-        View()->share('size',DB::table('size')->get());
-        // View()->share('coupon',DB::table('coupon')->get());
-        View()->share('order',DB::table('order')->get());
-        // View()->share('user',DB::table('user')->get());
-        
         Paginator::useBootstrap();
     }
 }
